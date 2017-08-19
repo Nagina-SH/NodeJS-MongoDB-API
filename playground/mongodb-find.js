@@ -28,7 +28,7 @@ MongoClient.connect('mongodb://localhost/nodejsdb', (err, db) => {
 	});
 	
 	
-	db.collection('Users').find().count()
+	db.collection('Users').find(name: 'Andrew').count()
 	.then((count) => {
 		console.log(`Users count ${count}`);
 	}, (err) => {
