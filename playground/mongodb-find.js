@@ -16,6 +16,7 @@ MongoClient.connect('mongodb://localhost/nodejsdb', (err, db) => {
 		return console.log('Unable to connect to MongoDB server');
 	}
 	console.log('Connected to nodejsdb server');
+
 	
 	db.collection('Users').find({
 		_id: new ObjectID('59986e32c15b9b1bdc457c85')
@@ -59,5 +60,4 @@ MongoClient.connect('mongodb://localhost/nodejsdb', (err, db) => {
 	// });
 	
 	//db.close();
-	
 });
