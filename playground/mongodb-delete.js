@@ -1,63 +1,29 @@
-//const insert = require('./mongodb-delete');
-// const mongodb = require('mongodb');
-// var MongoClient = mongodb.MongoClient;
-
-//destructuring
-const {MongoClient, ObjectID} = require('mongodb');
-var obj = new ObjectID();
-
-// console.log(obj);
-
-// var user = {name: 'Nagina', age: '27'};
-// var {name} = user;
-// console.log(name);
+var mongodb = require('mongodb');
+var MongoClient = mongodb.MongoClient;
+var ObjectID = mongodb.ObjectID;
 
 MongoClient.connect('mongodb://localhost/nodejsdb', (err, db) => {
 	if(err){
-		return console.log('Unable to connect to MongoDB server');
+		return console.log('Unable to connect to mongodb server');
 	}
+	
 	console.log('Connected to nodejsdb server');
 	
-	db.collection('Users').insert({
-		name: 'Nagina',
-		age: 29
-	},(err, result) => {
-		if(err) {
-			return console.log('Unable to insert the data into test collection', err);	
-		}
-		console.log(JSON.stringify(result.ops, undefined, 2));
+	db.collection('users').insert({email: 'delete email'})
+	.then((result) => {
+		//console.log(result);
+		console.log(JSON.stringify(result.ops, undefined, 2))
+	}, (e) => {
+		console.log(e);
 	});
 	
-	db.collection('Users').insert({
-		name: 'Andrew',
-		age: 30
-	},(err, result) => {
-		if(err) {
-			return console.log('Unable to insert the data into test collection', err);	
-		}
-		console.log(JSON.stringify(result.ops, undefined, 2));
-	});
-	
-	db.collection('Users').insert({
-		name: 'Andrew',
-		age: 31
-	},(err, result) => {
-		if(err) {
-			return console.log('Unable to insert the data into test collection', err);	
-		}
-		console.log(JSON.stringify(result.ops, undefined, 2));
-	});
-	
-	db.collection('Users').findOneAndDelete({
-		name: 'Andrew'
-		})
-	.then((docs) => {
-		console.log('docs');
-		console.log(JSON.stringify(docs, undefined, 2));
-	}, (err) => {
-		console.log(err);
+	db.collection('users').remove({email: 'delete email'})
+	.then((result) => {
+		console.log(result);
+		//console.log(JSON.stringify(result.ops, undefined, 2))
+	}, (e) => {
+		console.log(e);
 	});
 	
 	db.close();
-	
 });
