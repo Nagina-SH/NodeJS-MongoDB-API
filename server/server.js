@@ -5,6 +5,7 @@ const _ = require('lodash');
 var {mongoose} = require('./db/mongoose');
 var {task} = require('./models/users');
 var {user} = require('./models/user');
+var {authenticate} = require('./middleware/authenticate');
 
 //const Users = require('./models/users');
 //const user = require('./models/user');
@@ -144,6 +145,13 @@ app.post('/users', (req, res) => {
 		console.log(e);
 		res.status(404).send(e);
 	});
+});
+
+
+app.get('/users/me', authenticate, (req, res) => {
+	console.log(`req.user ${req.user}`);
+	res.send(req.user);
+	
 });
 
 app.listen(PORT, () => {
